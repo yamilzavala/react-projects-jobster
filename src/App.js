@@ -1,6 +1,11 @@
+import Landing from "./pages/Landing";
+import WrapperRouter from "./router/WrapperRouter";
+
 function App() {
   return (
-    <h2>jobster</h2>
+    <WrapperRouter>
+      <Landing/>      
+    </WrapperRouter>
   );
 }
 
