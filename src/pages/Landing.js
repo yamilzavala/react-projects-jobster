@@ -1,9 +1,10 @@
 import hunt from '../assets/images/job_hunt.svg';
 import { Logo } from '../components';
+import Wrapper from '../assets/wrappers/LandingPage';
 
 const Landing = () => {
     return (
-      <main>
+      <Wrapper>
         <nav>
           <Logo/>
         </nav>
@@ -20,7 +21,7 @@ const Landing = () => {
           </div>
           <img src={hunt} alt='job hunt' className='img main-img'/>
         </div>
-      </main>
+      </Wrapper>
     );
 };
 
