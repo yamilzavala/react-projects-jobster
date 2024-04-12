@@ -3,7 +3,8 @@ import { FormRow, Logo } from '../components';
 import {useState, useEffect} from 'react'
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch} from 'react-redux';
-import { loginUser, registerUser } from '../store/features/user/userThunks';
+import { loginUser, registerTestingUser, registerUser } from '../store/features/user/userThunks';
+import {useNavigate} from 'react-router-dom'
 
 const initialState = {
     name: '',
@@ -16,6 +17,13 @@ const Register = () => {
     const [values, setValues] = useState(initialState);
     const {isLoading, user} = useSelector(state => state.userState)
     const dispatch = useDispatch();
+    const navigate = useNavigate()
+
+    useEffect(() => {
+      setTimeout(() => {
+        if(user) navigate('/')
+      },2000)
+    }, [user])
    
     const handleChange = (e) => {
         const name = e.target.name;
@@ -35,7 +43,7 @@ const Register = () => {
         };
 
         if(isMember) {
-          dispatch(loginUser({email, password}))
+          dispatch(loginUser({email, password}))         
           return;
         }
 
@@ -61,8 +69,8 @@ const Register = () => {
           {/* password field */}
           <FormRow label='password' value={values.password} type='password' name='password' handler={handleChange}/>
   
-          <button type='submit' className='btn btn-block'>
-            submit
+          <button disabled={isLoading} type='submit' className='btn btn-block'>
+            {isLoading ? 'loading...' : 'submit'}
           </button>
 
           <p>

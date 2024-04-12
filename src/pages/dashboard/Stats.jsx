@@ -1,0 +1,11 @@
+import Wrapper from "../../assets/wrappers/StatsContainer";
+
+const Stats = () => {
+    return (
+        <Wrapper>
+            Stats
+        </Wrapper>
+    );
+};
+
+export default Stats;
