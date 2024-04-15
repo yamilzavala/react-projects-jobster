@@ -1,16 +1,31 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { registerUser, loginUser } from './userThunks';
-import { addUserToLocalStorage, getUserFromLocalStorage } from '../../../utils/localStorage';
+import { registerUser, loginUser, updateUser } from './userThunks';
+import { addUserToLocalStorage, getUserFromLocalStorage, removeUserFromLocalStorage } from '../../../utils/localStorage';
 
 const initialState = {
     isLoading: false,
-    user: getUserFromLocalStorage(),
+    isSidebarOpen: false,
+    user: 
+    getUserFromLocalStorage(),
 };
 
 const userSlice = createSlice({
     name: 'user',
     initialState,
+    reducers: {        
+        //toggle sidebar
+        togglesSidebar: (state) => {
+            state.isSidebarOpen = !state.isSidebarOpen;
+        },
+        //logout
+        logoutUser: (state) => {
+            state.user = null;
+            state.isSidebarOpen = false;
+            toast.success('Logout Successful!');
+            removeUserFromLocalStorage();
+        }
+    },
     extraReducers: (builder) => {
         builder
             //register
@@ -44,8 +59,22 @@ const userSlice = createSlice({
                 state.isLoading = false;
                 toast.error(payload);
             })
-            //logout
+            //update user
+            .addCase(updateUser.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(updateUser.fulfilled, (state, action) => {
+                const {user} = action.payload;
+                state.isLoading = false;
+                state.user = user;
+                addUserToLocalStorage(user)
+                toast.success(`user updated`);
+            })
+            .addCase(updateUser.rejected, (state, {payload}) => {
+                state.isLoading = false;
+                toast.error(payload)
+            })
     }
 })
-
+export const {logoutUser, togglesSidebar} = userSlice.actions;
 export default userSlice.reducer;
