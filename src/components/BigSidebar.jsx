@@ -6,15 +6,10 @@ import NavLinks from './NavLinks';
 
 const BigSidebar = () => {
     const {isSidebarOpen} = useSelector(state => state.userState);
-    const dispatch = useDispatch();
-
-    const toggle = () => {
-        dispatch(togglesSidebar())
-    }
 
     return (
         <Wrapper>
-             <div className={isSidebarOpen ? 'sidebar-container show-sidebar' : 'sidebar-container' }>
+             <div className={isSidebarOpen ? 'sidebar-container' : 'sidebar-container show-sidebar' }>
                 <div className='content'>
                     <header>
                         <Logo />

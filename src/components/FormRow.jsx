@@ -6,6 +6,7 @@ const FormRow = ({label, value, type, name, handler}) => {
             </label>
 
             <input
+            id={name}
             type={type}
             value={value}
             name={name}
