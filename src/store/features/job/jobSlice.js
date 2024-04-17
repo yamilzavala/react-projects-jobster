@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addJob } from "./jobThunks";
+import { addJob, deleteJob, editJob } from "./jobThunks";
 import { toast } from 'react-toastify';
 import { getUserFromLocalStorage } from "../../../utils/localStorage";
 
@@ -30,6 +30,9 @@ const jobSlice = createSlice({
                 location: getUserFromLocalStorage()?.location || ''
             }
         },
+        setEditJob: (state, {payload}) => {
+            return {...state, isEditing: true, ...payload}
+        }
     },
     extraReducers: (builder) => {
         //add job
@@ -45,8 +48,28 @@ const jobSlice = createSlice({
                 state.isLoading = false;
                 toast.error(payload);
             })
+        //delete job
+            .addCase(deleteJob.fulfilled, ({payload}) => {
+                toast.success('user deleted');
+            })
+            .addCase(deleteJob.rejected, ({payload}) => {
+                toast.error(payload);
+            })
+        // edit job
+            .addCase(editJob.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(editJob.fulfilled, (state) => {
+                state.isLoading = false;
+                toast.success('Job edited!');
+            })
+            .addCase(editJob.rejected, (state, {payload}) => {
+                state.isLoading = false;
+                toast.error(payload);
+            })
+
     }
 })
 
-export const {handleChange, clearValues} = jobSlice.actions;
+export const {handleChange, clearValues, setEditJob} = jobSlice.actions;
 export default jobSlice.reducer;
