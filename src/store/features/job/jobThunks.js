@@ -2,18 +2,16 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import customFetch from "../../../utils/axios";
 import { clearValues } from "./jobSlice";
 import { logoutUser } from "../user/userSlice";
-import { getAllJobs } from "../allJobs/allJobsThunks";
 import { hideLoading, showLoading } from "../allJobs/allJobsSlice";
+import { getAllJobs } from "../allJobs/allJobsThunks";
+import { authHeader } from "../../../utils/authHeader";
 
 export const addJob = createAsyncThunk(
     'job/addJob',
     async (job ,thunkAPI) => {
         try {
-            const resp = await customFetch.post('/jobs',job, {
-                headers: { 
-                    Authorization: `Bearer ${thunkAPI.getState().userState.user.token}`
-                }
-            })
+            //const resp = await customFetch.post('/jobs',job, authHeader(thunkAPI))
+            const resp = await customFetch.post('/jobs',job)
             thunkAPI.dispatch(clearValues())
             return resp.data
         } catch (error) {
@@ -31,12 +29,8 @@ export const deleteJob = createAsyncThunk(
     async (jobId, thunkAPI) => {
         thunkAPI.dispatch(showLoading())
         try {
-            const resp = await customFetch.delete(`/jobs/${jobId}`, {
-                headers: {
-                    Authorization: `Bearer ${thunkAPI.getState().userState.user.token}`
-                }
-            } )
-            thunkAPI.dispatch(clearValues())
+            const resp = await customFetch.delete(`/jobs/${jobId}`)
+            thunkAPI.dispatch(getAllJobs());
             return resp?.data
         } catch (error) {
             thunkAPI.dispatch(hideLoading())
@@ -49,11 +43,7 @@ export const editJob = createAsyncThunk(
     'job/editJob', 
     async ({jobId, job}, thunkAPI) => {
         try {
-            const resp = await customFetch.patch(`/jobs/${jobId}`, job, {                
-                headers: {
-                    Authorization: `Bearer ${thunkAPI.getState().userState.user.token}`
-                }
-            } )
+            const resp = await customFetch.patch(`/jobs/${jobId}`, job)
             thunkAPI.dispatch(clearValues())
             return resp?.data?.msg
         } catch (error) {

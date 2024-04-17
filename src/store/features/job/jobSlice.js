@@ -49,7 +49,7 @@ const jobSlice = createSlice({
                 toast.error(payload);
             })
         //delete job
-            .addCase(deleteJob.fulfilled, ({payload}) => {
+            .addCase(deleteJob.fulfilled, () => {
                 toast.success('user deleted');
             })
             .addCase(deleteJob.rejected, ({payload}) => {
