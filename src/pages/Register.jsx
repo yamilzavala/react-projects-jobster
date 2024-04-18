@@ -22,7 +22,7 @@ const Register = () => {
     useEffect(() => {
       setTimeout(() => {
         if(user) navigate('/')
-      },2000)
+      },1000)
     }, [user])
    
     const handleChange = (e) => {
@@ -71,6 +71,10 @@ const Register = () => {
   
           <button disabled={isLoading} type='submit' className='btn btn-block'>
             {isLoading ? 'loading...' : 'submit'}
+          </button>
+
+          <button disabled={isLoading} type='button' className='btn btn-block btn-hipster' onClick={() => dispatch(loginUser({email: 'testUser@test.com', password: 'secret'}))}>
+            {isLoading ? 'loading...' : 'demo'}
           </button>
 
           <p>

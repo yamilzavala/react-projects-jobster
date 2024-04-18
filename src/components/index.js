@@ -8,3 +8,8 @@ export {default as FormSelect} from './FormSelect';
 export {default as Job} from './Job';
 export {default as JobsContainer} from './JobsContainer';
 export {default as SearchContainer} from './SearchContainer';
+export {default as Loading} from './Loading';
+export {default as ChartsContainer} from './ChartsContainer';
+export {default as StatsContainer} from './StatsContainer';
+export {default as AreaChartComponent} from './AreaChart';
+export {default as BarChartComponent} from './BarChart';
