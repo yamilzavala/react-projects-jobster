@@ -13,12 +13,15 @@ const initialFiltersState = {
 
   const initialState = {
     isLoading: false,
-    jobs: [], //jobs: jobsMock,    
+    // jobs: [], 
+    jobs: jobsMock,  
     totalJobs: 0,
     numOfPages: 1,
     page: 1,
-    stats: {}, //stats: statsMock,
-    monthlyApplications: [],//monthlyApplications: monthlyApplicationsMock,    
+    //stats: {},
+    stats: statsMock,
+    //monthlyApplications: [], 
+    monthlyApplications: monthlyApplicationsMock,  
     ...initialFiltersState,
   }; 
 
@@ -32,6 +35,12 @@ const allJobsSlice = createSlice({
         hideLoading: (state) => {
             state.isLoading = false
         },
+        handleChange: (state, {payload: {name, value}}) => {
+            state[name] = value;
+        },
+        resetFilters: (state) => {
+            return {...state, ...initialFiltersState}
+        }
     },
     extraReducers: (builder) => {
         //get all jobs
@@ -42,6 +51,7 @@ const allJobsSlice = createSlice({
             .addCase(getAllJobs.fulfilled, (state, {payload}) => {
                 state.isLoading = false;
                 state.jobs = payload.jobs;
+                state.numOfPages = payload.numOfPages;
                 state.totalJobs = payload.totalJobs;
             })
             .addCase(getAllJobs.rejected, (state, {payload}) => {
@@ -63,5 +73,5 @@ const allJobsSlice = createSlice({
             })
     }
 });
-export const {showLoading, hideLoading} = allJobsSlice.actions;
+export const {showLoading, hideLoading, handleChange, resetFilters} = allJobsSlice.actions;
 export default allJobsSlice.reducer;
