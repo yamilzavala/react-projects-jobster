@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getAllJobs, showStats } from "./allJobsThunks";
 import { toast } from 'react-toastify';
+import { jobsMock, monthlyApplicationsMock, statsMock } from "../../../mocks/mocks";
 
 const initialFiltersState = {
     search: '',
@@ -12,39 +13,12 @@ const initialFiltersState = {
 
   const initialState = {
     isLoading: false,
-    jobs: [],
+    jobs: [], //jobs: jobsMock,    
     totalJobs: 0,
     numOfPages: 1,
     page: 1,
-    //stats: {},
-    stats: {pending: 20, interview: 25, declined: 22},
-    //monthlyApplications: [],
-    monthlyApplications: [
-        {
-            "date": "Mar 2022",
-            "count": 8
-        },
-        {
-            "date": "Apr 2022",
-            "count": 6
-        },
-        {
-            "date": "May 2022",
-            "count": 4
-        },
-        {
-            "date": "Jun 2022",
-            "count": 5
-        },
-        {
-            "date": "Jul 2022",
-            "count": 6
-        },
-        {
-            "date": "Aug 2022",
-            "count": 5
-        }
-    ],
+    stats: {}, //stats: statsMock,
+    monthlyApplications: [],//monthlyApplications: monthlyApplicationsMock,    
     ...initialFiltersState,
   }; 
 

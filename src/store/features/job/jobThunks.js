@@ -10,8 +10,8 @@ export const addJob = createAsyncThunk(
     'job/addJob',
     async (job ,thunkAPI) => {
         try {
-            //const resp = await customFetch.post('/jobs',job, authHeader(thunkAPI))
-            const resp = await customFetch.post('/jobs',job)
+            const resp = await customFetch.post('/jobs',job, {headers: authHeader(thunkAPI)})
+            //const resp = await customFetch.post('/jobs',job)
             thunkAPI.dispatch(clearValues())
             return resp.data
         } catch (error) {
@@ -29,7 +29,7 @@ export const deleteJob = createAsyncThunk(
     async (jobId, thunkAPI) => {
         thunkAPI.dispatch(showLoading())
         try {
-            const resp = await customFetch.delete(`/jobs/${jobId}`)
+            const resp = await customFetch.delete(`/jobs/${jobId}`, {headers: authHeader(thunkAPI)})
             thunkAPI.dispatch(getAllJobs());
             return resp?.data
         } catch (error) {
@@ -43,7 +43,7 @@ export const editJob = createAsyncThunk(
     'job/editJob', 
     async ({jobId, job}, thunkAPI) => {
         try {
-            const resp = await customFetch.patch(`/jobs/${jobId}`, job)
+            const resp = await customFetch.patch(`/jobs/${jobId}`, job, {headers: authHeader(thunkAPI)})
             thunkAPI.dispatch(clearValues())
             return resp?.data?.msg
         } catch (error) {
