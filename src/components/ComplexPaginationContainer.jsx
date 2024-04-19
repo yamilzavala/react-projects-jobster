@@ -80,7 +80,6 @@ const ComplexPaginationContainer = () => {
             {/* prev */}
             <button className='prev-btn' onClick={prevPage}>
                 <HiChevronDoubleLeft/>
-                prev
             </button>
 
             {/* PAGES */}
@@ -93,7 +92,6 @@ const ComplexPaginationContainer = () => {
             {/* next */}
             <button className='next-btn'  onClick={nextPage}>
                 <HiChevronDoubleRight/>
-                next
             </button>
             </div>
         </Wrapper>
