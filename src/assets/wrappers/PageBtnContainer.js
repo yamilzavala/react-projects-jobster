@@ -24,14 +24,17 @@ const Wrapper = styled.section`
     border-radius: var(--borderRadius);
     cursor: pointer;
   }
+  .pageBtn:hover {
+    background: var(--primary-100);
+  }
   .active {
     background: var(--primary-500);
     color: var(--white);
   }
   .prev-btn,
   .next-btn {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 40px;
     background: var(--white);
     border-color: transparent;
     border-radius: var(--borderRadius);
@@ -45,6 +48,12 @@ const Wrapper = styled.section`
     cursor: pointer;
     transition: var(--transition);
   }
+  .next-btn {
+    margin-left: 0.5rem;
+  }
+  .prev-btn {
+    margin-right: 0.5rem;
+  } 
   .prev-btn:hover,
   .next-btn:hover {
     background: var(--primary-500);
@@ -53,7 +62,9 @@ const Wrapper = styled.section`
   .center-pages {
     display: flex;    
     width: 100%;
-    padding-bottom: 1rem;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
   }
   .center-btn {
     gap: 0rem;
@@ -61,27 +72,9 @@ const Wrapper = styled.section`
     flex-direction: row;
     margin: 0.5rem 0rem;    
   }
-  @media (max-width: 300px) {
-    .prev-btn, 
-    .next-btn{
-      height: 40px;
-      width: 40px;      
-    }
-    .next-btn {
-      margin-left: 0.5rem;
-    }
-    .prev-btn {
-      margin-right: 0.5rem;
-    }    
-    .center-pages {
-      gap: 0rem;
-      justify-content: center;
-      text-align: center;
-      align-items: center;
-      //flex-direction: column;
-    } 
+  @media (max-width: 300px) {  
     .pageBtn {
-      width: 30px;
+      width: 33px;
       font-size: 0.75rem;
     }
   }
