@@ -84,11 +84,11 @@ const ComplexPaginationContainer = () => {
             </button>
 
             {/* PAGES */}
-            {
-               
-                    renderPageButtons()
-             
-            }
+            <div className="center-btn">
+                {
+                        renderPageButtons()
+                }
+            </div>
 
             {/* next */}
             <button className='next-btn'  onClick={nextPage}>

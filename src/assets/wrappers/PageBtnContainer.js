@@ -53,12 +53,27 @@ const Wrapper = styled.section`
   .center-pages {
     display: flex;
     gap: 1rem;
-    width: 100%;
+    width: 100%;    
+    padding-bottom: 1rem;
+  }
+  .center-btn {
+    display: flex;
+    flex-direction: row;
+    margin: 0.5rem 0rem;    
   }
   @media (max-width: 470px) {
+    .prev-btn,
+    .next-btn {
+      width: 80%;
+      align-items: center;
+      text-align: center;
+    }
     .center-pages {
-      gap: 0.1rem;
+      gap: 0rem;
       justify-content: center;
+      text-align: center;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
     }
   }
