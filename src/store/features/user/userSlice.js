@@ -7,8 +7,8 @@ const initialState = {
     isLoading: false,
     isSidebarOpen: false,
     user: 
-    //{email: 'test@gmail.com', password: 'secret', name: 'peter'},
     getUserFromLocalStorage(),
+    //{email: 'test@gmail.com', password: 'secret', name: 'peter'},
 };
 
 const userSlice = createSlice({

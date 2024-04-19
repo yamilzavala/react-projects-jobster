@@ -10,7 +10,7 @@ export const checkForUnauthorizedResponse = (error, thunkAPI) => {
 }
 
 const customFetch = axios.create({
-    baseURL: 'https://www.redux-toolkit-jobster-api-server.onrender.com/api/v1',
+    baseURL: 'https://redux-toolkit-jobster-api-server.onrender.com/api/v1',
   });
 
 export default customFetch;
