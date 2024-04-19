@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { registerUser, loginUser, updateUser } from './userThunks';
+import { registerUser, loginUser, updateUser, clearStoreThunk } from './userThunks';
 import { addUserToLocalStorage, getUserFromLocalStorage, removeUserFromLocalStorage } from '../../../utils/localStorage';
 
 const initialState = {
     isLoading: false,
     isSidebarOpen: false,
     user: 
-    {email: 'test@gmail.com', password: 'secret', name: 'peter'},
-    //getUserFromLocalStorage(),
+    //{email: 'test@gmail.com', password: 'secret', name: 'peter'},
+    getUserFromLocalStorage(),
 };
 
 const userSlice = createSlice({
@@ -76,6 +76,10 @@ const userSlice = createSlice({
             .addCase(updateUser.rejected, (state, {payload}) => {
                 state.isLoading = false;
                 toast.error(payload)
+            })
+            //clear
+            .addCase(clearStoreThunk.rejected, () => {
+                toast.error('There was an error')
             })
     }
 })

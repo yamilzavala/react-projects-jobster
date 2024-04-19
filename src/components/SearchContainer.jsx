@@ -10,9 +10,10 @@ const SearchContainer = () => {
     const dispatch = useDispatch();
 
     const handleSearch = (e) => {
+        //if(isLoading) return;
         const name = e.target.name;
         const value = e.target.value;
-        dispatch(handleChange({name, value}))
+        dispatch(handleChange({name, value}))        
     }
 
     const clearFilters = () => {

@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import customFetch from '../../../utils/axios'
+import customFetch, { checkForUnauthorizedResponse } from '../../../utils/axios'
 import { authHeader } from '../../../utils/authHeader';
+import { logoutUser } from './userSlice';
+import { clearAllJobsState, resetFilters } from '../allJobs/allJobsSlice';
 
 export const loginUser = createAsyncThunk(
     'user/loginUser',
@@ -45,10 +47,21 @@ export const updateUser = createAsyncThunk(
             const resp = await customFetch.patch('/auth/updateUser', user, {headers: authHeader(thunkAPI)})
             return resp.data
         } catch (error) {       
-            if(error.response.status === 401) {
-                return thunkAPI.rejectWithValue('Unauthorized! Loggin out...');
-            }      
-            return thunkAPI.rejectWithValue(error.response.data.msg)
+           return checkForUnauthorizedResponse(error, thunkAPI)
+        }
+    }
+)
+
+export const clearStoreThunk = createAsyncThunk(
+    'user/clearStore',
+    async (message, thunkAPI) => {
+        try {
+            thunkAPI.dispatch(logoutUser(message))
+            thunkAPI.dispatch(clearAllJobsState())
+            thunkAPI.dispatch(resetFilters())
+            return Promise.resolve()
+        } catch (error) {                 
+            return Promise.reject()
         }
     }
 )

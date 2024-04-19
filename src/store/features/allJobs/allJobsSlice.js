@@ -13,15 +13,15 @@ const initialFiltersState = {
 
   const initialState = {
     isLoading: false,
-    // jobs: [], 
-    jobs: jobsMock,  
+    jobs: [], 
+    //jobs: jobsMock,  
     totalJobs: 0,
-    numOfPages: 1,
+    numOfPages: 0,
     page: 1,
-    //stats: {},
-    stats: statsMock,
-    //monthlyApplications: [], 
-    monthlyApplications: monthlyApplicationsMock,  
+    stats: {},
+    //stats: statsMock,
+    monthlyApplications: [], 
+    //monthlyApplications: monthlyApplicationsMock,  
     ...initialFiltersState,
   }; 
 
@@ -36,11 +36,16 @@ const allJobsSlice = createSlice({
             state.isLoading = false
         },
         handleChange: (state, {payload: {name, value}}) => {
+            state.page = 1;
             state[name] = value;
+        },
+        handlePage: (state, {payload: {page}}) => {
+            state.page = page
         },
         resetFilters: (state) => {
             return {...state, ...initialFiltersState}
-        }
+        },
+        clearAllJobsState: (state) => initialState,
     },
     extraReducers: (builder) => {
         //get all jobs
@@ -73,5 +78,5 @@ const allJobsSlice = createSlice({
             })
     }
 });
-export const {showLoading, hideLoading, handleChange, resetFilters} = allJobsSlice.actions;
+export const {showLoading, hideLoading, handleChange, resetFilters, handlePage, clearAllJobsState} = allJobsSlice.actions;
 export default allJobsSlice.reducer;
