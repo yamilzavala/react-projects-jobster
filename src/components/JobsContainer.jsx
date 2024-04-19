@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Loading from './Loading';
 import { getAllJobs } from '../store/features/allJobs/allJobsThunks';
 import PageBtnContainer from './PageBtnContainer';
+import ComplexPaginationContainer from './ComplexPaginationContainer';
 
 const JobsContainer = () => {
     const {isLoading, jobs, totalJobs, numOfPages, page, search, searchStatus, searchType, sort} = useSelector(store => store.allJobsState)
@@ -29,7 +30,8 @@ const JobsContainer = () => {
                     return <Job key={job._id} {...job}/>
                 })}
             </div>
-            {numOfPages > 1 && <PageBtnContainer/>}
+            {/* {numOfPages > 1 && <PageBtnContainer/>} */}
+            {numOfPages > 1 && <ComplexPaginationContainer/>}
         </Wrapper>
     );
 };
